@@ -1,5 +1,6 @@
 const { model, Schema } = require('mongoose')
 
+//workout model
 const Workout = new Schema({
   day: Date,
   exercises: [{

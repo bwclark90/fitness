@@ -15,9 +15,9 @@ router.post('/exercises', (req, res) => {
     .then(exercise => {
       Workout.findByIdAndUpdate(exercise.workout, { $push: { exercises: exercise._id } })
         .then(_ => res.json(exercise))
-        .catch(err => console.log('error in making  the update route for workout', err))
+        .catch(err => console.log('error', err))
     })
-    .catch(err => console.log('error in making the exercise, in exercise routes: ', err))
+    .catch(err => console.log('error: ', err))
 })
 
 // update 
@@ -31,7 +31,7 @@ router.put('/exercises/:id', (req, res) => {
 router.delete('/exercises/:id', (req, res) => {
   Exercise.findByIdAndDelete(req.params.id)
     .then(() => res.sendStatus(200))
-    .catch(err => console.log('error in delete exercoses route: ', err))
+    .catch(err => console.log('error: ', err))
 })
 
 module.exports = router

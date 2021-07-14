@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/bwclark90/fitness/issues"
   },
-  "homepage": "https://github.com/bwclark90/fitness#readme"
+  "homepage": "https://github.com/bwclark90/fitness#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
 }

@@ -3,6 +3,7 @@ const { Workout } = require('../models')
 
 // get all
 router.get('/workouts', (req, res) => {
+  console.log(1)
   Workout.aggregate([
     {
       $addFields: {
@@ -18,27 +19,31 @@ router.get('/workouts', (req, res) => {
 
 // add
 router.put('/workouts/:id', (req, res) => {
+  console.log(2)
   Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body } })
     .then(_ => {
       console.log(req.body)
-      res.sendStatus(200)
+      res.json(_)
     })
     .catch(err => console.log(err))
 })
 
 // create 
 router.post('/workouts', (req, res) => {
-  const newWorkout = {
-    ...req.body,
-    day: new Date(new Date().setDate(new Date().getDate()))
-  }
-  Workout.create(newWorkout)
+  console.log(3)
+  // const newWorkout = {
+  //   ...req.body,
+  //   day: new Date(new Date().setDate(new Date().getDate()))
+  // }
+  // console.log('newWorkout', newWorkout)
+  Workout.create(req.body)
     .then(workout => res.json(workout))
-    .catch(err => console.log('Error in posting workout: ', err))
+    .catch(err => console.log('Error', err))
 })
 
 
 router.get('/workouts/range', (req, res) => {
+  console.log(4)
   Workout.aggregate([
     {
       $addFields: {
@@ -62,9 +67,10 @@ router.get('/workouts/range', (req, res) => {
 
 //delete
 router.delete('/workouts/:id', (req, res) => {
+  console.log(5)
   Workout.findByIdAndDelete(req.params.id)
     .then(() => res.sendStatus(200))
-    .catch(err => console.log('error in delete workouts route: ', err))
+    .catch(err => console.log('error ', err))
 })
 
 module.exports = router
